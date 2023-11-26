@@ -1,0 +1,45 @@
+<?php
+require_once 'fetch_data.php';
+
+function generateTable($page = 1) {
+    $tableName = 'TestsCatalog';
+    $data = fetchData($tableName, $page);
+
+    ob_start();
+
+    echo '<table class="w-full whitespace-no-wrap">';
+    echo '<thead>';
+    echo '<tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">';
+    echo '<th class="px-4 py-3">Test Code</th>';
+    echo '<th class="px-4 py-3">Name</th>';
+    echo '<th class="px-4 py-3">Description</th>';
+    echo '<th class="px-4 py-3">Cost</th>';
+    echo '</tr>';
+    echo '</thead>';
+    echo '<tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">';
+
+    foreach ($data as $row) {
+        $description = $row["description"];
+        if (strlen($description) > 30) {
+            $description = substr($description, 0, 30) . '...';
+        }
+
+        echo '<tr class="text-gray-700 dark:text-gray-400">';
+        echo '<td class="px-4 py-3">'.$row["test_code"].'</td>';
+        echo '<td class="px-4 py-3">'.$row["name"].'</td>';
+        echo '<td class="px-4 py-3">'.$description.'</td>';
+        echo '<td class="px-4 py-3">$'.number_format($row["cost"], 2).'</td>';
+        echo '</tr>';
+    }
+
+    echo '</tbody>';
+    echo '</table>';
+
+    $output = ob_get_clean();
+
+    return $output;
+}
+function getCountTotal() {
+    $tableName = 'TestsCatalog';
+    return fetchCount($tableName);
+}

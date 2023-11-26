@@ -1,0 +1,50 @@
+version: "3"
+
+services:
+  webserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: apache_server
+    restart: always
+    volumes:
+      - ./public_html:/var/www/html/
+      - ./mysql_logs/:/var/log/mysql/
+      - ./key/aes_key.txt:/key/aes_key.txt
+    ports:
+      - 8080:80
+    depends_on:
+      - mysql_server
+    networks:
+      - lamp_network
+
+  mysql_server:
+    image: "mysql:5.7"
+    container_name: mysql_server
+    restart: always
+    ports:
+      - 3307:3306
+    volumes:
+      - ./mysql_data/:/var/lib/mysql
+      - ./mysql_logs/:/var/log/mysql/
+      - ./mysql_conf/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./key/aes_key.txt:/key/aes_key.txt
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: db_sec
+    networks:
+      - lamp_network
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+    depends_on:
+      - mysql_server
+    networks:
+      - lamp_network
+
+networks:
+  lamp_network:
+    driver: bridge

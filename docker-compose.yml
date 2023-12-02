@@ -10,7 +10,7 @@ services:
     volumes:
       - ./public_html:/var/www/html/
       - ./mysql_logs/:/var/log/mysql/
-      - ./key/aes_key.txt:/key/aes_key.txt
+      - ./key/aes_key.key:/key/aes_key.key
     ports:
       - 8080:80
     depends_on:
@@ -28,7 +28,7 @@ services:
       - ./mysql_data/:/var/lib/mysql
       - ./mysql_logs/:/var/log/mysql/
       - ./mysql_conf/my.cnf:/etc/mysql/conf.d/my.cnf
-      - ./key/aes_key.txt:/key/aes_key.txt
+      - ./key/aes_key.key:/key/aes_key.key
     environment:
       MYSQL_ROOT_PASSWORD: 1234
       MYSQL_DATABASE: db_sec

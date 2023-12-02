@@ -2839,3 +2839,19 @@ LIMIT 50
 2023-11-27T18:46:06.117088Z	   47 Execute	SELECT COUNT(*) AS total FROM Patients WHERE id=38
 2023-11-27T18:46:06.118026Z	   47 Close stmt	
 2023-11-27T18:46:06.118224Z	   47 Quit	
+mysqld, Version: 5.7.41-log (MySQL Community Server (GPL)). started with:
+Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+mysqld, Version: 5.7.41-log (MySQL Community Server (GPL)). started with:
+Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+2023-12-02T00:57:17.745780Z	    2 Connect	patient@172.20.0.4 on db_sec using TCP/IP
+2023-12-02T00:57:17.763570Z	    2 Prepare	SELECT *, AES_DECRYPT(ordering_physician, 'ã2è×¢"xÁý2M\~dîú¡±õ¯HCm{_') as ordering_physician FROM Orders WHERE patient_id=38 LIMIT 40 OFFSET 0
+2023-12-02T00:57:17.763665Z	    2 Execute	SELECT *, AES_DECRYPT(ordering_physician, 'ã2è×¢"xÁý2M\~dîú¡±õ¯HCm{_') as ordering_physician FROM Orders WHERE patient_id=38 LIMIT 40 OFFSET 0
+2023-12-02T00:57:17.763954Z	    2 Close stmt	
+2023-12-02T00:57:17.764064Z	    2 Quit	
+2023-12-02T00:57:17.764576Z	    3 Connect	patient@172.20.0.4 on db_sec using TCP/IP
+2023-12-02T00:57:17.764920Z	    3 Prepare	SELECT COUNT(*) AS total FROM Orders WHERE patient_id=38
+2023-12-02T00:57:17.764963Z	    3 Execute	SELECT COUNT(*) AS total FROM Orders WHERE patient_id=38
+2023-12-02T00:57:17.765238Z	    3 Close stmt	
+2023-12-02T00:57:17.765485Z	    3 Quit	
